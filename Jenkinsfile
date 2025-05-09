@@ -5,8 +5,9 @@ label 'local-agent'
 }
 	environment {
 		dockerImage = ''
-		registry = 'pgts2023/mtoautomation'
+		registry = 'nikhildocker1986/demo-repository'
 		registryCredential = 'DockerHub'
+		IMAGE_TAG = "demo-project-${env.BUILD_NUMBER}"
 	}
 	stages{
 
@@ -24,10 +25,22 @@ label 'local-agent'
         steps{
          script
                 {
-                def imageTag = "demo-project-${env.BUILD_NUMBER}"
-                dockerImage = docker.build(imageTag)
+                dockerImage = docker.build("${IMAGE_TAG}")
                 }
              }
+    }
+    stage('Push Image to Docker Hub')
+    {
+        steps
+        {
+            script
+            {
+                withCredentials([usernamePassword(credentialsId: "${registryCredential}", passwordVariable: 'pass', usernameVariable: 'user')]) {
+                bat "docker login --username=${user} --password=${pass}"
+                bat "docker tag ${IMAGE_TAG} ${registry}:${env.BUILD_NUMBER}"
+                bat "docker push ${registry}:${env.BUILD_NUMBER}"
+            }
+        }
     }
    }
 
