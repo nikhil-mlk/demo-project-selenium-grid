@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/master/caches/git-818d8b7c1ef0358acf08802dde84b109" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/master/caches/git-92868f48a85110c695ca4eb57ef3ac2b" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/Demo-ImageBuilder" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/Demo-ImageBuilder@2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/Demo-Runner" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/Demo-Runner@2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/SELENIUM_DOCKER_BUILDER" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/SELENIUM_DOCKER_BUILDER@2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/SELENIUM_DOCKER_BUILDER@3" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/Selenium_Docker_Integration" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/Selenium_Docker_Integration@2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/Selenium_Docker_Integration@3" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/Selenium_Docker_Integration@4" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jenkins-ci-cd/volumes/node/workspace/Selenium_Docker_Integration@5" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/runner" vcs="Git" />
+  </component>
+</project>

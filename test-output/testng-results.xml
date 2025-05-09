@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="9" passed="9" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-04-03T22:17:12Z" name="Testing" finished-at="2024-04-03T22:17:25Z" duration-ms="12466">
+    <groups>
+    </groups>
+    <test started-at="2024-04-03T22:17:12Z" name="Demo Automation" finished-at="2024-04-03T22:17:25Z" duration-ms="12466">
+      <class name="testcases.CustomerRegistration2">
+        <test-method is-config="true" signature="setupDriver()[pri:0, instance:testcases.CustomerRegistration2@fbd1f6]" started-at="2024-04-03T22:17:12Z" name="setupDriver" finished-at="2024-04-03T22:17:19Z" duration-ms="6536" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setupDriver -->
+        <test-method signature="customerRegistration()[pri:0, instance:testcases.CustomerRegistration2@fbd1f6]" started-at="2024-04-03T22:17:19Z" name="customerRegistration" finished-at="2024-04-03T22:17:21Z" duration-ms="1993" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- customerRegistration -->
+        <test-method signature="clickFlightSearchButton()[pri:0, instance:testcases.CustomerRegistration2@fbd1f6]" started-at="2024-04-03T22:17:21Z" name="clickFlightSearchButton" finished-at="2024-04-03T22:17:23Z" depends-on-methods="testcases.CustomerRegistration2.customerRegistration" duration-ms="1705" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clickFlightSearchButton -->
+        <test-method signature="flightSearch()[pri:0, instance:testcases.CustomerRegistration2@fbd1f6]" started-at="2024-04-03T22:17:23Z" name="flightSearch" finished-at="2024-04-03T22:17:25Z" depends-on-methods="testcases.CustomerRegistration2.clickFlightSearchButton" duration-ms="2217" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- flightSearch -->
+      </class> <!-- testcases.CustomerRegistration2 -->
+      <class name="testcases.CustomerRegistration3">
+        <test-method is-config="true" signature="setupDriver()[pri:0, instance:testcases.CustomerRegistration3@1ce24091]" started-at="2024-04-03T22:17:12Z" name="setupDriver" finished-at="2024-04-03T22:17:19Z" duration-ms="6570" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setupDriver -->
+        <test-method signature="customerRegistration()[pri:0, instance:testcases.CustomerRegistration3@1ce24091]" started-at="2024-04-03T22:17:19Z" name="customerRegistration" finished-at="2024-04-03T22:17:21Z" duration-ms="1966" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- customerRegistration -->
+        <test-method signature="clickFlightSearchButton()[pri:0, instance:testcases.CustomerRegistration3@1ce24091]" started-at="2024-04-03T22:17:21Z" name="clickFlightSearchButton" finished-at="2024-04-03T22:17:21Z" depends-on-methods="testcases.CustomerRegistration3.customerRegistration" duration-ms="77" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clickFlightSearchButton -->
+        <test-method signature="flightSearch()[pri:0, instance:testcases.CustomerRegistration3@1ce24091]" started-at="2024-04-03T22:17:21Z" name="flightSearch" finished-at="2024-04-03T22:17:23Z" depends-on-methods="testcases.CustomerRegistration3.clickFlightSearchButton" duration-ms="2232" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- flightSearch -->
+      </class> <!-- testcases.CustomerRegistration3 -->
+      <class name="testcases.CustomerRegistration1">
+        <test-method is-config="true" signature="setupDriver()[pri:0, instance:testcases.CustomerRegistration1@55fe41ea]" started-at="2024-04-03T22:17:12Z" name="setupDriver" finished-at="2024-04-03T22:17:19Z" duration-ms="6432" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setupDriver -->
+        <test-method signature="customerRegistration()[pri:0, instance:testcases.CustomerRegistration1@55fe41ea]" started-at="2024-04-03T22:17:19Z" name="customerRegistration" finished-at="2024-04-03T22:17:21Z" duration-ms="1938" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- customerRegistration -->
+        <test-method signature="clickFlightSearchButton()[pri:0, instance:testcases.CustomerRegistration1@55fe41ea]" started-at="2024-04-03T22:17:21Z" name="clickFlightSearchButton" finished-at="2024-04-03T22:17:22Z" depends-on-methods="testcases.CustomerRegistration1.customerRegistration" duration-ms="1716" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clickFlightSearchButton -->
+        <test-method signature="flightSearch()[pri:0, instance:testcases.CustomerRegistration1@55fe41ea]" started-at="2024-04-03T22:17:22Z" name="flightSearch" finished-at="2024-04-03T22:17:25Z" depends-on-methods="testcases.CustomerRegistration1.clickFlightSearchButton" duration-ms="2199" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- flightSearch -->
+      </class> <!-- testcases.CustomerRegistration1 -->
+    </test> <!-- Demo Automation -->
+  </suite> <!-- Testing -->
+</testng-results>

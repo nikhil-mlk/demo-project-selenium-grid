@@ -1,0 +1,29 @@
+
+i
+java:S20959"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(¼ÂÀ“8Øôë£¶2
+i
+java:S2095!"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(¼ÂÀ“8×ôë£¶2
+E	java:S108.")Either remove or fill this block of code.(Äé†ˆ8¶Ø–öë1
+E	java:S108B")Either remove or fill this block of code.(Äé†ˆ8ÆØ–öë1
+]	java:S125H"<This block of commented-out lines of code should be removed.(ÒÌâ–øÿÿÿÿ8ÎØ–öë1
+Z
+java:S1128"=Remove this unused import 'org.openqa.selenium.Capabilities'.(ÿ·šâ8Íõë£¶2
+f
+java:S1128	"IRemove this unused import 'org.openqa.selenium.support.ui.WebDriverWait'.(¥÷ó8Íõë£¶2
+[
+java:S1128
+">Remove this unused import 'org.testng.annotations.AfterClass'.(´ä8Íõë£¶2
+Z
+java:S1128"=Remove this unused import 'org.testng.annotations.AfterTest'.(Ü³¹Ê8Íõë£¶2
+`
+java:S1128">Remove this unused import 'org.testng.annotations.BeforeTest'.(‚µö¨üÿÿÿÿ8Íõë£¶2
+\
+java:S1128":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8Íõë£¶2
+R
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8Íõë£¶2
+Q
+java:S1128"/Remove this unused import 'java.time.Duration'.(ëá¯‰üÿÿÿÿ8Íõë£¶2
+N
+java:S1068"2Remove this unused "bufferedReader" private field.(ˆ±€l8ĞØ–öë1
+P
+java:S1068".Remove this unused "fileReader" private field.(åô’†ÿÿÿÿÿ8ĞØ–öë1
