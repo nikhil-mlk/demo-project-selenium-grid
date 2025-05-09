@@ -24,7 +24,8 @@ label 'local-agent'
         steps{
          script
                 {
-                dockerImage = docker.build("demo-project-1")
+                def imageTag = "demo-project-${env.BUILD_NUMBER}"
+                dockerImage = docker.build(imageTag)
                 }
              }
     }
