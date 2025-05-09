@@ -5,7 +5,7 @@ label 'local-agent'
 }
 	environment {
 		dockerImage = ''
-		registry = 'nikhildocker1986/demo-repository'
+		registry = 'nikhildocker1986/demoproject'
 		registryCredential = 'DockerHub'
 	}
 	stages{
