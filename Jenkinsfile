@@ -1,5 +1,8 @@
 pipeline{
-agent any
+agent
+{
+label 'local-agent'
+}
 	environment {
 		dockerImage = ''
 		registry = 'pgts2023/mtoautomation'
