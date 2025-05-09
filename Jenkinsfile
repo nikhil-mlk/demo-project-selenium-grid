@@ -44,6 +44,13 @@ label 'local-agent'
         }
     }
    }
+   post
+   {
+    always
+    {
+        bat "docker logout"
+    }
+   }
 
 }
 }
