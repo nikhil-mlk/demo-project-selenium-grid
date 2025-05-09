@@ -1,34 +1,30 @@
 pipeline{
 agent any
-
-    stages{
+	environment {
+		dockerImage = ''
+		registry = 'pgts2023/mtoautomation'
+		registryCredential = 'DockerHub'
+	}
+	stages{
 
     stage('Build Jar')
     {
         steps{
         script
         {
-        bat "mvn clean package -DskipTests"
+        bat 'mvn clean package -DskipTests'
         }
       }
     }
-
-    stage('Build Image')
+    stage('Build Docker Image')
     {
         steps{
-        bat "docker build -t=nmalik1986/selenium ."
-    }
-    }
-    stage('Push Image')
-        {
-        steps{
-         script{
-            bat "docker push nmalik1986/selenium"
+         script
+                {
+                dockerImage = docker.build("demo-project-1")
                 }
-     }
-
+             }
     }
-
-    }
+   }
 
 }
