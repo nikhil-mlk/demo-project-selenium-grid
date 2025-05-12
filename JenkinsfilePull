@@ -24,7 +24,7 @@ pipeline {
             steps{
                 script{
                 def tag = params.PULLED_BUILD_NUMBER.trim()
-                //bat "set IMAGE_VERSION=${params.PULLED_BUILD_NUMBER} && docker-compose up"
+
                 bat "set IMAGE_VERSION=${tag} && docker-compose up -d"
                 }
             }
