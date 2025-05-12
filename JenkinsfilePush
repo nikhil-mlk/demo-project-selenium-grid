@@ -42,10 +42,8 @@ pipeline {
         {
             script {
                  def currentBuildNumber = env.BUILD_NUMBER
-                 build job: 'demo-project-pull',
-                 parameters: [
-                     string(name: 'PULLED_BUILD_NUMBER', value: currentBuildNumber)
-                 ]
+                 build job: 'demo-project-pull'
+
             }
         }
     }
