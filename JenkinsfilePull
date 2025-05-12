@@ -1,0 +1,29 @@
+pipeline {
+    agent { label 'local-agent' }
+
+    environment {
+            registry = 'nikhildocker1986/demoproject'
+            registryCredential = 'DockerHub'
+        }
+    parameters  {
+        string(name: 'PULLED_BUILD_NUMBER', defaultValue: '', description: 'Image tag to use (build number)')
+    }
+
+    stages {
+       stage('Login to Docker Hub') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: env.registryCredential, passwordVariable: 'pass', usernameVariable: 'user')]) {
+                        bat "docker login --username=${user} --password=${pass}"
+                    }
+                }
+            }
+        }
+        stage("Pull the image and Run Test Cases")
+        {
+            script{
+                bat "set IMAGE_VERSION=${params.PULLED_BUILD_NUMBER} && docker-compose up -d"
+            }
+        }
+    }
+}

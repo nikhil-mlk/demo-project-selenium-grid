@@ -5,7 +5,7 @@ services:
     ports:
       - "4444:4444"
     networks:
-      - mto-grid-net
+      - demo-grid-net
   chrome:
     image: selenium/node-chrome
     shm_size: '2g'
@@ -19,19 +19,19 @@ services:
       - SE_NODE_MAX_SESSIONS=10
       - HUB_HOST=hub
     networks:
-      - mto-grid-net
+      - demo-grid-net
   testsexecution:
-     image: mto-selenium-grid
+     image: nikhildocker1986/demoproject:${IMAGE_VERSION}
      depends_on:
         - chrome
         - hub
      volumes:
        - ./automation-results:/MTOAutomation/test-output
      networks:
-       - mto-grid-net
+       - demo-grid-net
 
 networks:
-  mto-grid-net:
+  demo-grid-net:
     driver: bridge
 
 
