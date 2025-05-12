@@ -28,7 +28,8 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: env.registryCredential, passwordVariable: 'pass', usernameVariable: 'user')]) {
                         bat "docker login --username=${user} --password=${pass}"
-                        bat "docker tag ${env.imageTag} ${env.registry}:${env.BUILD_NUMBER}"
+
+
                         bat "docker push ${env.registry}:${env.BUILD_NUMBER}"
                     }
                 }
