@@ -21,8 +21,10 @@ pipeline {
         }
         stage('Pull the image and Run Test Cases')
         {
-            script{
+            steps{
+                script{
                 bat "set IMAGE_VERSION=${params.PULLED_BUILD_NUMBER} && docker-compose up -d"
+                }
             }
         }
     }
