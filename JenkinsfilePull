@@ -3,7 +3,6 @@ pipeline {
     parameters  {
         string(name: 'PULLED_BUILD_NUMBER', defaultValue: '', description: 'Image tag to use (build number)')
     }
-
     stages {
        stage('Pull the image and Run Test Cases')
         {

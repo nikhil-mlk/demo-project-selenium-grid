@@ -9,6 +9,7 @@ public class CustomerRegistration1 extends BaseClass {
     public void customerRegistration()
     {
         RegistrationPage registrationPage=new RegistrationPage(driver);
+        System.out.println("Test case started");
         registrationPage.enterName("Nikhil");
         registrationPage.enterLastName("Malik");
         registrationPage.enterEmailId("test@test.com");
@@ -21,6 +22,7 @@ public class CustomerRegistration1 extends BaseClass {
     @Test(dependsOnMethods = {"customerRegistration"})
     public void clickFlightSearchButton()
     {
+        System.out.println("Test case started");
         RegistrationConfirmationPage registrationConfirmationPage=new RegistrationConfirmationPage(driver);
         registrationConfirmationPage.clickGotoFlightSearchButton();
     }
