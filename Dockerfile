@@ -1,7 +1,7 @@
 FROM bellsoft/liberica-openjdk-alpine
 # Instal curl and jq in linux container
 RUN apk add curl jq
-
+# Creating work directory
 WORKDIR /demo-docker-project-directory
 
 ADD target/docker-resources/libs                      libs

@@ -22,5 +22,13 @@ pipeline {
                         }
                     }
                 }
+                post{
+                    success{
+                        script{
+                            archiveArtifacts artifacts: 'automation-results/emailable-report.html', allowEmptyArchive: true
+                            bat "docker-compose down --remove-orphans"
+                        }
+                    }
+                }
     }
 
