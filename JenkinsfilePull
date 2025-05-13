@@ -1,21 +1,22 @@
 pipeline {
-    agent { label 'local-agent' }
+    agent { label 'run-test-node' }
     parameters  {
         string(name: 'PULLED_BUILD_NUMBER', defaultValue: '', description: 'Image tag to use (build number)')
     }
     stages {
-       stage('Pull the image and Run Test Cases')
-        {
-            steps{
-                script{
-                def tag = params.PULLED_BUILD_NUMBER.trim()
-                echo "Pulling image: nikhildocker1986/demoproject:${tag}"
-                withEnv(["IMAGE_VERSION=${tag}"]) {
-                    bat 'echo IMAGE_VERSION=%IMAGE_VERSION%'
-                    bat "docker-compose up -d"
+        stage('Pull the image and Run Test Cases')
+                {
+                    steps{
+                        script{
+                        def tag = params.PULLED_BUILD_NUMBER.trim()
+                        echo "Pulling image: nikhildocker1986/demoproject:${tag}"
+                        withEnv(["IMAGE_VERSION=${tag}"]) {
+                            bat 'echo IMAGE_VERSION=%IMAGE_VERSION%'
+                            bat "docker-compose up -d"
+                        }
+                        }
+                    }
                 }
-                }
-            }
-        }
+
     }
 }
