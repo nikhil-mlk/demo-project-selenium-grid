@@ -12,13 +12,10 @@ pipeline {
                 def tag = params.PULLED_BUILD_NUMBER.trim()
                 echo "Pulling image: nikhildocker1986/demoproject:${tag}"
                 withEnv(["IMAGE_VERSION=${tag}"]) {
-                                        bat 'echo IMAGE_VERSION=%IMAGE_VERSION%'
-                                        bat 'docker-compose pull'
-                                        bat 'docker-compose up -d'
-                                    }
-
-
-
+                    bat 'echo IMAGE_VERSION=%IMAGE_VERSION%'
+                    bat 'docker-compose pull'
+                    bat 'docker-compose up -d'
+                }
                 }
             }
         }
