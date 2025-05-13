@@ -3,6 +3,7 @@ import baseclass.BaseClass;
 import flightreservation.FlightSearchPage;
 import flightreservation.RegistrationConfirmationPage;
 import flightreservation.RegistrationPage;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 public class CustomerRegistration1 extends BaseClass {
     @Test
@@ -18,6 +19,7 @@ public class CustomerRegistration1 extends BaseClass {
         registrationPage.selectState();
         registrationPage.enterZip("v8v 1e2");
         registrationPage.clickRegisterButton();
+        Assert.assertEquals(4,6);
     }
     @Test(dependsOnMethods = {"customerRegistration"})
     public void clickFlightSearchButton()
