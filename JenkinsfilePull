@@ -13,7 +13,7 @@ pipeline {
                 echo "Pulling image: nikhildocker1986/demoproject:${tag}"
                 withEnv(["IMAGE_VERSION=${tag}"]) {
                     bat 'echo IMAGE_VERSION=%IMAGE_VERSION%'
-                    bat 'docker-compose up -d'
+                    bat "docker-compose up -d"
                 }
                 }
             }
