@@ -8,6 +8,7 @@
             <class name="testcases.CustomerRegistration1"/>
             <class name="testcases.CustomerRegistration2"/>
             <class name="testcases.CustomerRegistration3"/>
+            <class name="testcases.CustomerRegistration4"/>
         </classes>
     </test>
 </suite>
