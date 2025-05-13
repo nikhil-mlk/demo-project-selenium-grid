@@ -10,11 +10,13 @@ pipeline {
                         script{
                         def tag = params.PULLED_BUILD_NUMBER.trim()
                         echo "Pulling image: nikhildocker1986/demoproject:${tag}"
-                        withEnv(["IMAGE_VERSION=${tag}"]) {
-                            bat 'echo IMAGE_VERSION=%IMAGE_VERSION%'
-                            bat "docker-compose down --remove-orphans"
-                            bat "docker-compose pull"
-                            bat "docker-compose up -d"
+                        // Write the tag to .env file so docker-compose can use it
+                        writeFile file: '.env', text: "IMAGE_VERSION=${tag}"
+                         // Run Docker Compose with that environment
+                                    bat 'type .env'
+                                    bat "docker-compose down --remove-orphans"
+                                    bat "docker-compose pull"
+                                    bat "docker-compose up -d"
                         }
                         }
                     }
