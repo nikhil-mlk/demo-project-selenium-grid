@@ -4,8 +4,12 @@ RUN apk add curl jq
 
 WORKDIR /demo-Docker-Project-Directory
 
-ADD target/docker-resources ./
-ADD healthcheck.sh   healthcheck.sh
+ADD target/docker-resources/libs                      libs
+ADD target/docker-resources/demo.properties           demo.properties
+ADD target/docker-resources/healthcheck.sh            healthcheck.sh
+ADD target/docker-resources/pom.xml                   pom.xml
+ADD target/docker-resources/testng.xml                testng.xml
+
 ENTRYPOINT sh healthcheck.sh
 
 
