@@ -16,6 +16,7 @@ pipeline {
                             bat 'type .env'
                             bat "docker-compose down --remove-orphans"
                             bat "docker-compose pull"
+                            bat "docker-compose config"
                             bat "docker-compose up -d"
                         }
                         }
@@ -25,7 +26,6 @@ pipeline {
                     success{
                         script{
                             archiveArtifacts artifacts: 'automation-results/emailable-report.html', allowEmptyArchive: true
-                            bat "docker-compose down --remove-orphans"
                         }
                     }
                 }
