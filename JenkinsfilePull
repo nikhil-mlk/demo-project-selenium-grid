@@ -16,6 +16,7 @@ pipeline {
                                     bat 'type .env'
                                     bat "docker-compose down --remove-orphans"
                                     bat "docker-compose pull"
+                                    bat "docker-compose config"
                                     bat "docker-compose up -d"
                         }
                         }
