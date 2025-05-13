@@ -7,4 +7,4 @@ do
 done
 
 echo "Hub is ready, starting tests..."
-java -DrunOnGrid=yes -cp selenium-docker.jar:selenium-docker-tests.jar:libs/* org.testng.TestNG Test.xml
+java -DrunOnGrid=yes -cp selenium-docker.jar:selenium-docker-tests.jar:libs/* org.testng.TestNG testng.xml
