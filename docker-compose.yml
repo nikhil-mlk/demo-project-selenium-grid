@@ -29,7 +29,6 @@ services:
        - ./automation-results:/demo-docker-project-directory/test-output
      networks:
        - demo-grid-net
-
 networks:
   demo-grid-net:
     driver: bridge
