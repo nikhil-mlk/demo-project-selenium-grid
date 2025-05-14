@@ -25,7 +25,7 @@ pipeline {
                 post{
                     success{
                         script{
-                            archiveArtifacts artifacts: 'automation-results/emailable-report', allowEmptyArchive: true
+                            archiveArtifacts artifacts: '**/emailable-report.html', allowEmptyArchive: true
                         }
                     }
                 }
