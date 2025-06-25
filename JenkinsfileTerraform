@@ -31,8 +31,21 @@ pipeline {
                                }
                         }
                 }
-            }
+         stage('Execute Terraform file')
+             {
+                 steps{
+                     script{
+                         bat "terraform init"
+                         bat "terraform plan"
+                         bat "terraform apply -auto-approve"
+
+                            }
+                     }
+             }
+
         }
+
+    }
 
 
 
