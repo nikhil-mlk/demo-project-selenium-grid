@@ -21,14 +21,14 @@ pipeline {
                 {
                     steps{
                         script{
-                            withCredentials([file(credentialsId: 'aws-public-key', variable: 'PUB_KEY_FILE')]) {
+                            withCredentials([string(credentialsId: 'aws-public-key', variable: 'PUB_KEY')]) {
                                 bat """
                                     echo public_key = \\"%PUB_KEY%\\" > terraform.tfvars
                                     terraform init
                                     terraform apply -auto-approve -var-file=terraform.tfvars
                                 """
-                }
-                               }
+                            }
+                        }
                         }
                 }
          stage('Create EC2 Instance')
