@@ -22,8 +22,6 @@ Dockerfile,6\6\6651ddff6eb82c840ced7c1dddee15c6e1913dd4
 demo.properties,e\0\e0dd9ac5a2cef0f8fff35fb7546e8a3d655c2fc4
 F
 test-suites/testng.xml,c\8\c8663b41dd3c52f153ebc2bf4dccf2024c98fa04
-;
-Jenkinsfile,0\c\0c2c5c506cef0ed2d3ad2b7e45e97980b66f5520
 ?
 runner/grid.yml,d\d\dd54586f9fc87d627064b5ac5f03ad6c66ffec1f
 F
@@ -36,3 +34,13 @@ B
 healthcheck.sh,6\7\67e4a3427e5ee2403c63edd4577c3a3887275976
 Q
 !jenkins-ci-cd/docker-compose.yaml,6\f\6fa5f7114072eae488088812fd025032e731b741
+>
+JenkinsfileAws,e\3\e3e200f117bc33330d88f67f2b21fab62e5e4b80
+4
+.env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
+?
+JenkinsfilePush,8\e\8ea9ab18006a9f184a6c7854a4bef7076b407dd9
+B
+docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
+?
+JenkinsfilePull,7\3\7340e8522d44fb9ee6e2ef18bbbb19a03a6d2804

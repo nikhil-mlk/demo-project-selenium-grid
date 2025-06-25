@@ -1,0 +1,40 @@
+pipeline {
+    agent { label 'run-test-node' }
+    environment {
+            AWS_ACCESS_KEY_ID = credentials('AWS-Access-Secret-Key')
+        }
+    stages {
+        stage('Execute Terraform file')
+                {
+                    steps{
+                        script{
+                            withCredentials([usernamePassword(credentialsId: 'AWS-Access-Secret-Key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                                bat """
+                                    aws configure set aws_access_key_id %AWS_ACCESS_KEY_ID%
+                                    aws configure set aws_secret_access_key %AWS_SECRET_ACCESS_KEY%
+                                    """
+                               }
+                        }
+                    }
+                }
+        stage('Execute Terraform file')
+                {
+                    steps{
+                        script{
+                            withCredentials([file(credentialsId: 'aws-public-key', variable: 'PUB_KEY_FILE')]) {
+                                bat """
+                                    echo public_key = \\"%PUB_KEY%\\" > terraform.tfvars
+                                    terraform init
+                                    terraform apply -auto-approve -var-file=terraform.tfvars
+                                """
+                }
+                               }
+                        }
+                }
+            }
+        }
+
+
+
+
+

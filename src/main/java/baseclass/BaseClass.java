@@ -1,30 +1,19 @@
 package baseclass;
-import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Duration;
 import java.util.Properties;
 public class BaseClass {
+    //---private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     protected WebDriver driver;
     private Properties properties;
-    private BufferedReader bufferedReader;
-    private FileReader fileReader;
     public ChromeOptions options;
     @BeforeClass
     public void setupDriver(){
@@ -56,14 +45,6 @@ public class BaseClass {
                 this.driver.manage().window().maximize();
                 this.driver.get(appURL);
             }
-            /* if (properties.getProperty("runOnGrid").equalsIgnoreCase("yes")) {
-
-                this.driver = getRemoteDriver();
-                this.driver.get("https://d1uh9e7cu07ukd.cloudfront.net/selenium-docker/reservation-app/index.html");
-            } else {
-                this.driver = getLocalDriver();
-                this.driver.get("https://d1uh9e7cu07ukd.cloudfront.net/selenium-docker/reservation-app/index.html");
-            }*/
             reader.close();
         }
         catch(Exception a)

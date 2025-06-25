@@ -1,0 +1,57 @@
+pipeline {
+    agent { label 'aws-node' }
+    environment {
+            STACK_NAME = "MyAppStack"
+            TEMPLATE_FILE = "template.yaml"
+            REGION = "us-east-1"
+        }
+    parameters  {
+        string(name: 'PULLED_BUILD_NUMBER', defaultValue: '', description: 'Image tag to use (build number)')
+    }
+    stages {
+        stage('Launch Template')
+                        {
+                            steps{
+                                script{
+                                 withCredentials([usernamePassword(credentialsId: 'aws-credentials', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                                    sh '''
+                                        export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+                                        export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+
+                                        aws cloudformation deploy \
+                                          --stack-name $STACK_NAME \
+                                          --template-file $TEMPLATE_FILE \
+                                          --region $REGION \
+                                          --capabilities CAPABILITY_NAMED_IAM
+                                    '''
+                                    }
+                                }
+                                }
+                            }
+        stage('Pull the image and Run Test Cases')
+                {
+                    steps{
+                        script{
+                        def tag = params.PULLED_BUILD_NUMBER.trim()
+                        echo "Pulling image: nikhildocker1986/demoproject:${tag}"
+                        // Write the tag to .env file so docker-compose can use it
+                        writeFile file: '.env', text: "IMAGE_VERSION=${tag}"
+                         // Run Docker Compose with that environment
+                            bat 'type .env'
+                            bat "docker-compose down --remove-orphans"
+                            bat "docker-compose pull"
+                            bat "docker-compose config"
+                            bat "docker-compose up -d"
+                        }
+                        }
+                    }
+                }
+                post{
+                    success{
+                        script{
+                            archiveArtifacts artifacts: '**/emailable-report.html', allowEmptyArchive: true
+                        }
+                    }
+                }
+    }
+
