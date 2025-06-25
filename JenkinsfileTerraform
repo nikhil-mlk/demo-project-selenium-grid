@@ -31,6 +31,40 @@ pipeline {
                         }
                         }
                 }
+
+
+
+
+                stage('Fetch EC2 IP') {
+                            steps {
+                                script {
+                                    def ec2Ip = bat(script: 'terraform output -raw ec2_public_ip', returnStdout: true).trim()
+                                    env.EC2_PUBLIC_IP = ec2Ip
+                                    echo "EC2 IP is: ${env.EC2_PUBLIC_IP}"
+                                }
+                            }
+                        }
+
+                        stage('Run docker-compose on EC2') {
+                            steps {
+                                withCredentials([string(credentialsId: 'aws-private-key', variable: 'PRIVATE_KEY')]) {
+                                    bat """
+                                        echo %PRIVATE_KEY% > ec2-key.pem
+                                        powershell -Command "Set-Content ec2-key.pem (Get-Content ec2-key.pem) -NoNewline"
+                                        chmod 400 ec2-key.pem
+
+                                        ssh -o StrictHostKeyChecking=no -i ec2-key.pem ubuntu@%EC2_PUBLIC_IP% " \
+                                            git clone https://github.com/nikhil-mlk/demo-project-selenium-grid.git app && \
+                                            cd app && \
+                                            docker-compose up -d"
+                                    """
+                                }
+                            }
+                        }
+
+
+
+
         }
 
     }
