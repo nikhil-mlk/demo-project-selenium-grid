@@ -34,13 +34,17 @@ pipeline {
     {
         success
         {
-            script {
+            /*script {
                  def currentBuildNumber = env.BUILD_NUMBER
                  build job: 'run-test-on-aws',
                  parameters: [
                      string(name: 'PULLED_BUILD_NUMBER', value: currentBuildNumber)
                  ]
-            }
+            }*/
+            script {
+               def currentBuildNumber = env.BUILD_NUMBER
+               build job: 'terraform-file-execute'
+                  }
         }
     }
    }
