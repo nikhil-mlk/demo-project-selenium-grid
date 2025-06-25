@@ -4,7 +4,7 @@ pipeline {
             AWS_ACCESS_KEY_ID = credentials('AWS-Access-Secret-Key')
         }
     stages {
-        stage('AWS Access and Secret Key')
+        stage('Set AWS Access and Secret Key')
                 {
                     steps{
                         script{
@@ -17,7 +17,7 @@ pipeline {
                         }
                     }
                 }
-        stage('AWS Public Key ')
+        stage('Set AWS Public Key and Create EC2 Instance')
                 {
                     steps{
                         script{
@@ -31,18 +31,6 @@ pipeline {
                         }
                         }
                 }
-         stage('Create EC2 Instance')
-             {
-                 steps{
-                     script{
-                         bat "terraform init"
-                         bat "terraform plan"
-                         bat "terraform apply -auto-approve"
-
-                            }
-                     }
-             }
-
         }
 
     }

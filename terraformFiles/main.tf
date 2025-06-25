@@ -81,7 +81,7 @@ resource "aws_instance" "my_ec2" {
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
   associate_public_ip_address = true
   key_name                    = "aws_key" # ✅ AWS EC2 Key Pair name
-  # Install Docker, Compose, Git, Java, Maven
+  # Install Docker, Docker-Compose, Git, Java, Maven
   user_data = <<-EOF
               #!/bin/bash
               apt update -y
