@@ -68,10 +68,16 @@ resource "aws_security_group" "allow_ssh" {
     Name = "AllowSSH"
   }
 }
-resource "aws_key_pair" "deployer" {
+#resource "aws_key_pair" "deployer" {
+ # key_name      = "aws_key"
+  #public_key = var.public_key
+#}
+
+data "aws_key_pair" "deployer" {
   key_name      = "aws_key"
-  public_key = var.public_key
+  #public_key = var.public_key
 }
+
 
 # 6. EC2 Instance
 resource "aws_instance" "my_ec2" {
