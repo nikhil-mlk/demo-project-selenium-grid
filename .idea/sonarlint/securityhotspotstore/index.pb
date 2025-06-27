@@ -34,8 +34,6 @@ B
 healthcheck.sh,6\7\67e4a3427e5ee2403c63edd4577c3a3887275976
 Q
 !jenkins-ci-cd/docker-compose.yaml,6\f\6fa5f7114072eae488088812fd025032e731b741
->
-JenkinsfileAws,e\3\e3e200f117bc33330d88f67f2b21fab62e5e4b80
 4
 .env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
 ?

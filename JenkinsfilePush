@@ -36,7 +36,7 @@ pipeline {
         {
             /*script {
                  def currentBuildNumber = env.BUILD_NUMBER
-                 build job: 'run-test-on-aws',
+                 build job: 'run-test-on-AWS',
                  parameters: [
                      string(name: 'PULLED_BUILD_NUMBER', value: currentBuildNumber)
                  ]
