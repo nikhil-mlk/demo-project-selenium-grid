@@ -24,7 +24,7 @@ pipeline {
                                         bat """
                                             echo public_key = "%PUB_KEY%" > terraform.tfvars
                                             terraform init
-                                            terraform apply -auto-approve -var-file=terraform.tfvars
+                                            terraform apply -auto-approve
                                         """
                                     }
                                 }
