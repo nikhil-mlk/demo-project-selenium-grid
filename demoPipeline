@@ -2,7 +2,10 @@ pipeline {
     agent { label 'run-test-node' }
     environment {
             AWS_ACCESS_KEY_ID = credentials('AWS-Access-Secret-Key')
-        }
+             imageTag = "demo-project-${env.BUILD_NUMBER}"
+             registry = 'nikhildocker1986/demoproject'
+             registryCredential = 'DockerHub'
+             }
     stages {
         stage('Set AWS Access and Secret Key')
                 {
@@ -50,9 +53,45 @@ pipeline {
                                 }
                             }
                         }
+        stage('Build Jar') {
+            steps {
+                bat "mvn clean package -DskipTests"
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+
+                    dockerImage=docker.build("${env.registry}:${env.BUILD_NUMBER}")
+                }
+            }
+        }
+        stage('Push Image to Docker Hub') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: env.registryCredential, passwordVariable: 'pass', usernameVariable: 'user')]) {
+                        bat "docker login --username=${user} --password=${pass}"
+                        bat "docker push ${env.registry}:${env.BUILD_NUMBER}"
+                    }
+                }
+            }
+        }
+        stage('Run docker-compose on EC2') {
+            steps {
+                withCredentials([file(credentialsId: 'aws-private-key', variable: 'PRIVATE_KEY')]) {
+                    bat """
+                        chmod 400 %PRIVATE_KEY%
+                        ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY% ubuntu@%EC2_PUBLIC_IP% " \
+                        git clone https://github.com/nikhil-mlk/demo-project-selenium-grid.git app && \
+                        cd app && \
+                        docker-compose up -d"
+                        docker-compose down
+                    """
+                }
+            }
 
     }
-
+    }
     }
 
 
