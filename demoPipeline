@@ -78,10 +78,10 @@ pipeline {
         }
         stage('Run docker-compose on EC2') {
             steps {
-                withCredentials([file(credentialsId: 'aws-private-key', variable: 'PRIVATE_KEY')]) {
+                withCredentials([string(credentialsId: 'aws-private-key', variable: 'PRIVATE_KEY_CONTENT')]) {
+                    writeFile file: 'aws_key.pem', text: "${PRIVATE_KEY_CONTENT}"
                     bat """
-                        chmod 400 %PRIVATE_KEY%
-                        ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY% ubuntu@%EC2_PUBLIC_IP% " \
+                        ssh -o StrictHostKeyChecking=no -i aws_key.pem ubuntu@%EC2_PUBLIC_IP% " \
                         git clone https://github.com/nikhil-mlk/demo-project-selenium-grid.git app && \
                         cd app && \
                         docker-compose up -d"
