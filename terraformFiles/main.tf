@@ -74,7 +74,7 @@ resource "aws_security_group" "allow_ssh" {
 #}
 
 data "aws_key_pair" "deployer" {
-  key_name      = "aws_key"
+  key_name      = "aws_key
   #public_key = var.public_key
 }
 
