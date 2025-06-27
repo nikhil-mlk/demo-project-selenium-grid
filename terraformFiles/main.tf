@@ -68,13 +68,10 @@ resource "aws_security_group" "allow_ssh" {
     Name = "AllowSSH"
   }
 }
-#resource "aws_key_pair" "deployer" {
- # key_name      = "aws_key"
-  #public_key = var.public_key
-#}
+
 
 data "aws_key_pair" "deployer" {
-  key_name      = "aws_key
+  key_name      = "aws_key"
   #public_key = var.public_key
 }
 
