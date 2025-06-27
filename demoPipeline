@@ -42,10 +42,9 @@ pipeline {
         stage('Replace IP in properties file') {
                             steps {
                                 script {
-
-                                      bat powershell -Command "(Get-Content demo.properties) -replace '10.10.10.215','${env.EC2_PUBLIC_IP}' | Set-Content demo.properties"
-
-                                   echo "Updated demo.properties with EC2 IP"
+                                bat """
+                                powershell -Command "(Get-Content demo.properties) -replace '10.10.10.215','${env.EC2_PUBLIC_IP}' | Set-Content demo.properties"
+                                """
                                 }
                             }
                         }
