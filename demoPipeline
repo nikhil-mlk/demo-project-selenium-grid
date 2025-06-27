@@ -1,0 +1,60 @@
+pipeline {
+    agent { label 'run-test-node' }
+    environment {
+            AWS_ACCESS_KEY_ID = credentials('AWS-Access-Secret-Key')
+        }
+    stages {
+        stage('Set AWS Access and Secret Key')
+                {
+                    steps{
+                        script{
+                            withCredentials([usernamePassword(credentialsId: 'AWS-Access-Secret-Key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                                bat """
+                                    aws configure set aws_access_key_id %AWS_ACCESS_KEY_ID%
+                                    aws configure set aws_secret_access_key %AWS_SECRET_ACCESS_KEY%
+                                    """
+                               }
+                        }
+                    }
+                }
+        stage('Set AWS Public Key and Create EC2 Instance') {
+                            steps{
+                                script{
+                                    withCredentials([string(credentialsId: 'aws-public-key', variable: 'PUB_KEY')]) {
+                                        bat """
+                                            echo public_key = "%PUB_KEY%" > terraform.tfvars
+                                            terraform init
+                                            terraform apply -auto-approve -var-file=terraform.tfvars
+                                        """
+                                    }
+                                }
+                                }
+                            }
+        stage('Fetch EC2 IP') {
+                            steps {
+                                script {
+                                    def ec2Ip = bat(script: 'terraform output -raw ec2_public_ip', returnStdout: true).trim()
+                                    env.EC2_PUBLIC_IP = ec2Ip
+                                    echo "EC2 IP is: ${env.EC2_PUBLIC_IP}"
+                                }
+                            }
+                        }
+        stage('Replace IP in properties file') {
+                            steps {
+                                script {
+                                   bat """
+                                       powershell -Command "(Get-Content demo.properties) -replace '10.10.10.215','${env.EC2_PUBLIC_IP}' | Set-Content demo.properties"
+                                   """
+                                   echo "Updated demo.properties with EC2 IP"
+                                }
+                            }
+                        }
+
+    }
+
+    }
+
+
+
+
+
