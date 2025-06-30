@@ -28,7 +28,7 @@ pipeline {
                             git checkout master
                             git add docker-compose.yml
                             git commit -m "Updated docker-compose with build number ${env.BUILD_NUMBER}"
-                            git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/nikhil-mlk/demo-project-selenium-grid.git master
+                            git push -u origin master
                         """
                     }
                 }
