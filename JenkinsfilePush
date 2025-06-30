@@ -41,10 +41,6 @@ pipeline {
                      string(name: 'PULLED_BUILD_NUMBER', value: currentBuildNumber)
                  ]
             }*/
-            script {
-               def currentBuildNumber = env.BUILD_NUMBER
-               build job: 'terraform-file-execute'
-                  }
         }
     }
    }

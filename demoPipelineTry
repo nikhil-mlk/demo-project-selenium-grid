@@ -1,0 +1,42 @@
+pipeline {
+    agent { label 'run-test-node' }
+    environment {
+            AWS_ACCESS_KEY_ID = credentials('AWS-Access-Secret-Key')
+             imageTag = "demo-project-${env.BUILD_NUMBER}"
+             registry = 'nikhildocker1986/demoproject'
+             registryCredential = 'DockerHub'
+             }
+    stages {
+
+    stage('Replace IMAGE_VERSION with build number') {
+                steps {
+                    dir('C:/jenkins-runTests') {
+                        bat """
+                            powershell -Command "(Get-Content docker-compose.yml) -replace '\\$\\{IMAGE_VERSION\\}','${env.BUILD_NUMBER}' | Set-Content docker-compose.yml"
+                        """
+                    }
+                }
+            }
+    stage('Push updated docker-compose.yml to GitHub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'GithubCredentials', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                    dir('C:/jenkins-runTests') {
+                        bat """
+                            git config user.email "Nikhil.mlk19861986@gmail.com"
+                            git config user.name "nikhil-mlk"
+                            git add docker-compose.yml
+                            git commit -m "Updated docker-compose with build number ${env.BUILD_NUMBER}"
+                            git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/nikhil-mlk/demo-project-selenium-grid.git master
+                        """
+                    }
+                }
+            }
+        }
+
+    }
+    }
+
+
+
+
+
