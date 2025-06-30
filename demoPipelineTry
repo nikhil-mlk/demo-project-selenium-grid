@@ -10,7 +10,7 @@ pipeline {
 
     stage('Replace IMAGE_VERSION with build number') {
                 steps {
-                    dir('C:/jenkins-runTests') {
+                    dir('C:\jenkins-runTests\workspace\terraform-file-execute') {
 
                          bat '''
                              powershell -Command "(Get-Content docker-compose.yml) -replace '\\$\\{IMAGE_VERSION\\}','${env.BUILD_NUMBER}' | Set-Content docker-compose.yml"
@@ -21,7 +21,7 @@ pipeline {
     stage('Push updated docker-compose.yml to GitHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'GithubCredentials', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                    dir('C:/jenkins-runTests') {
+                    dir('C:\jenkins-runTests\workspace\terraform-file-execute') {
                         bat """
                             git config user.email "Nikhil.mlk19861986@gmail.com"
                             git config user.name "nikhil-mlk"
