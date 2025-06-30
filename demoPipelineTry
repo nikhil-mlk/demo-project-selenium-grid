@@ -11,9 +11,8 @@ pipeline {
     stage('Replace IMAGE_VERSION with build number') {
                 steps {
                     dir('C:/jenkins-runTests') {
-                        bat """
-                            powershell -Command "(Get-Content docker-compose.yml) -replace '\\$\\{IMAGE_VERSION\\}','${env.BUILD_NUMBER}' | Set-Content docker-compose.yml"
-                        """
+
+                        bat 'powershell -Command "(Get-Content docker-compose.yml) -replace \'\$\{IMAGE_VERSION\}\',\'${env.BUILD_NUMBER}\' | Set-Content docker-compose.yml"'
                     }
                 }
             }
