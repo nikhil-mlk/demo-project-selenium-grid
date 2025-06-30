@@ -13,7 +13,7 @@ pipeline {
                     dir('C:/jenkins-runTests/workspace/terraform-file-execute') {
 
                          bat """
-                                         powershell -Command "(Get-Content docker-compose.yml) -replace 'IMAGE_VERSION','${env.BUILD_NUMBER}' | Set-Content docker-compose.yml"
+                                         powershell -Command "(Get-Content docker-compose.yml) -replace '\\$\\{IMAGE_VERSION\\}', '${env.BUILD_NUMBER}' | Set-Content docker-compose.yml"
                                      """
                     }
                 }
