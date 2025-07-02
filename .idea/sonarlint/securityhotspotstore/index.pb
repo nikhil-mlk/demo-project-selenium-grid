@@ -42,3 +42,13 @@ B
 docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
 ?
 JenkinsfilePull,7\3\7340e8522d44fb9ee6e2ef18bbbb19a03a6d2804
+D
+JenkinsfileTerraform,a\3\a3bb00ecd61e93414a52eb793887fee1e6e9ced6
+<
+demoPipeline,e\4\e4bdb7c0d6500bd5720e2c9c93654c9e99e5b1b6
+;
+variable.tf,6\5\657578f2ddd1b393514ad039b262bda13b9e8d11
+7
+main.tf,5\b\5bd615dff78ce55f6c20b15c924188a31bfedff7
+?
+demoPipelineTry,5\4\54d01c17507ff38ca96dd5a958de521c394ffab5
