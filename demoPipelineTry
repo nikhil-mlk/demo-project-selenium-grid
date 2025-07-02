@@ -28,7 +28,7 @@ pipeline {
                             git checkout master
                             git add docker-compose.yml
                             git commit -m "Updated docker-compose with build number ${env.BUILD_NUMBER}"
-                            git push -f origin master
+                            git push -u origin master
                         """
                     }
                 }
