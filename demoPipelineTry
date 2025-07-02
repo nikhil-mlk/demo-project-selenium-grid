@@ -107,35 +107,30 @@ pipeline {
                 }
             }
         }
-        stage('Run docker-compose on EC2') {
+        stage('SSH into EC2 and Run Commands') {
             steps {
                 withCredentials([string(credentialsId: 'aws-private-key', variable: 'PRIVATE_KEY_CONTENT')]) {
-                    writeFile file: 'aws_key.pem', text: "${PRIVATE_KEY_CONTENT}"
-                    bat """
-                        ssh -o StrictHostKeyChecking=no -i aws_key.pem ubuntu@%EC2_PUBLIC_IP% " \
-                        git clone https://github.com/nikhil-mlk/demo-project-selenium-grid.git app && \
-                        cd app && \
-                        docker-compose up -d"
-                        docker-compose down
-                    """
+                    dir('C:/jenkins-runTests/workspace/terraform-file-execute') {
+                        script {
+                            // Write private key content to a .pem file
+                            writeFile file: 'aws_key.pem', text: "${PRIVATE_KEY_CONTENT}"
+                        }
+                        bat """
+                            REM Fix permissions for SSH to accept the private key
+                            powershell -Command "icacls aws_key.pem /inheritance:r; icacls aws_key.pem /grant:r ${env.USERNAME}:R"
+
+                            REM SSH into EC2 and run commands
+                            ssh -o StrictHostKeyChecking=no -i aws_key.pem ubuntu@${env.EC2_PUBLIC_IP} " \
+                            git clone https://github.com/nikhil-mlk/demo-project-selenium-grid.git app && \
+                            cd app && \
+                            docker-compose up -d"
+                        """
+                    }
                 }
             }
+        }
 
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
+}
     }
 
 
