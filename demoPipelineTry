@@ -107,23 +107,21 @@ pipeline {
                 }
             }
         }
-        stage('SSH into EC2 and Run Commands') {
+        stage('Run docker-compose on EC2') {
             steps {
-                withCredentials([string(credentialsId: 'aws-private-key', variable: 'PRIVATE_KEY_CONTENT')]) {
+                withCredentials([file(credentialsId: 'aws-private-key-file', variable: 'PRIVATE_KEY_PATH')]) {
                     dir('C:/jenkins-runTests/workspace/terraform-file-execute') {
-                        script {
-                            // Write private key content to a .pem file
-                            writeFile file: 'aws_key.pem', text: "${PRIVATE_KEY_CONTENT}"
-                        }
+
                         bat """
                             REM Fix permissions for SSH to accept the private key
-                            powershell -Command "icacls aws_key.pem /inheritance:r; icacls aws_key.pem /grant:r ${env.USERNAME}:R"
+                            powershell -Command "icacls %PRIVATE_KEY_PATH% /inheritance:r; icacls %PRIVATE_KEY_PATH% /grant:r %USERNAME%:R"
 
                             REM SSH into EC2 and run commands
-                            ssh -o StrictHostKeyChecking=no -i aws_key.pem ubuntu@${env.EC2_PUBLIC_IP} " \
-                            git clone https://github.com/nikhil-mlk/demo-project-selenium-grid.git app && \
-                            cd app && \
-                            docker-compose up -d"
+                            ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY_PATH% ubuntu@${env.EC2_PUBLIC_IP} ^
+                            "git clone https://github.com/nikhil-mlk/demo-project-selenium-grid.git app && cd app && docker-compose up -d"
+
+                            REM Optionally bring down after test execution if needed
+                            REM ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY_PATH% ubuntu@${env.EC2_PUBLIC_IP} "cd app && docker-compose down"
                         """
                     }
                 }
