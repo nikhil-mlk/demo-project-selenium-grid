@@ -107,7 +107,26 @@ pipeline {
                 }
             }
         }
+   stage('Run docker-compose on EC2') {
+            steps {
+                withCredentials([file(credentialsId: 'aws-private-key-file', variable: 'PRIVATE_KEY_PATH')]) {
+                    dir('C:/jenkins-runTests/workspace/terraform-file-execute') {
 
+                        bat """
+                            REM Fix permissions for SSH to accept the private key
+                            powershell -Command "icacls %PRIVATE_KEY_PATH% /inheritance:r; icacls %PRIVATE_KEY_PATH% /grant:r %USERNAME%:R"
+
+                            REM SSH into EC2 and run commands
+                            ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY_PATH% ubuntu@${env.EC2_PUBLIC_IP} ^
+                            "git clone https://github.com/nikhil-mlk/demo-project-selenium-grid.git app && cd app && docker-compose up -d"
+
+                            REM Optionally bring down after test execution if needed
+                            REM ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY_PATH% ubuntu@${env.EC2_PUBLIC_IP} "cd app && docker-compose down"
+                        """
+                    }
+                }
+            }
+        }
 
 
 
