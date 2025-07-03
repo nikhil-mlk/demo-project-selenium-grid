@@ -8,7 +8,7 @@ pipeline {
              }
     stages {
 
-    stage('Replace IMAGE_VERSION with build number') {
+    stage('Replace IMAGE_VERSION with build number in docker compose file') {
                 steps {
                     dir('C:/jenkins-runTests/workspace/terraform-file-execute') {
 
