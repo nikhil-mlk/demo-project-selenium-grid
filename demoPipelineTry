@@ -12,8 +12,9 @@ pipeline {
         steps {
             dir('C:/jenkins-runTests/workspace/terraform-file-execute') {
                 bat """
-                powershell -Command "& { (Get-Content docker-compose.yml) -replace 'nikhildocker1986/demoproject:[^\\"]*','nikhildocker1986/demoproject:${env.BUILD_NUMBER}' | Set-Content docker-compose.yml }"
+                powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "(Get-Content docker-compose.yml) -replace 'nikhildocker1986/demoproject:[^\\"]*','nikhildocker1986/demoproject:${env.BUILD_NUMBER}' | Set-Content docker-compose.yml"
                 """
+
 
 
 
