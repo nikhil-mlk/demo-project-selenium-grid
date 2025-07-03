@@ -26,7 +26,7 @@ services:
         - chrome
         - hub
      networks:
-       - demo-grid-net
+       - demo-grid-ne
 networks:
   demo-grid-net:
     driver: bridge
