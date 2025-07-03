@@ -202,22 +202,6 @@
                     </configuration>
                 </execution>
 
-                <execution>
-                    <id>copy-resource-five</id>
-                    <phase>process-resources</phase>
-                    <goals>
-                        <goal>copy-resources</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>${package.directory}</outputDirectory>
-                        <resources>
-                            <resource>
-                                <directory>${project.basedir}</directory>
-                                <includes>docker-compose.yml</includes>
-                            </resource>
-                        </resources>
-                    </configuration>
-                </execution>
 
             </executions>
             </plugin>

@@ -28,7 +28,8 @@ pipeline {
                             git checkout master
                             git add docker-compose.yml
                             git commit -m "Updated docker-compose with build number ${env.BUILD_NUMBER}"
-                            git push -f origin master
+                            //git push -f origin master
+                            git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/nikhil-mlk/demo-project-docker-compose-file.git master
                         """
                     }
                 }
@@ -115,7 +116,7 @@ pipeline {
 
                             REM SSH into EC2 and run commands
                             ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY_PATH% ubuntu@${env.EC2_PUBLIC_IP} ^
-                            "git clone https://github.com/nikhil-mlk/demo-project-selenium-grid.git app && cd app && sudo docker-compose up -d"
+                            "git clone https://github.com/nikhil-mlk/demo-project-docker-compose-file.git app && cd app && sudo docker-compose up -d"
 
                             REM Optionally bring down after test execution if needed
                             REM ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY_PATH% ubuntu@${env.EC2_PUBLIC_IP} "cd app && sudo docker-compose down"
