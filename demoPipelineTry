@@ -29,7 +29,9 @@ pipeline {
                             git add docker-compose.yml
                             git commit -m "Updated docker-compose with build number ${env.BUILD_NUMBER}"
                             //git push -f origin master
-                            git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/nikhil-mlk/demo-project-docker-compose-file.git master
+                            git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/nikhil-mlk/demo-project-docker-compose-file.git
+                            //git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/nikhil-mlk/demo-project-docker-compose-file.git master
+                            git push origin master
                         """
                     }
                 }
