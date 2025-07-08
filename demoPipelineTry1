@@ -70,19 +70,18 @@ pipeline {
 
 
 
-stage('Build Jar') {
+    stage('Build Jar and build docker image') {
             steps {
-                bat "mvn clean package -DskipTests"
-            }
-        }
-        stage('Build Docker Image') {
-            steps {
-                script {
+              dir('C:/jenkins-runTests/workspace/terraform-file-execute') {
+                  script {
+                      bat "mvn clean package -DskipTests"
+                      dockerImage=docker.build("${env.registry}:${env.BUILD_NUMBER}")
+                  }
+              }
 
-                    dockerImage=docker.build("${env.registry}:${env.BUILD_NUMBER}")
-                }
             }
         }
+
     stage('Push Image to Docker Hub') {
             steps {
                 script {
