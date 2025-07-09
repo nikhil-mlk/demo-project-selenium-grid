@@ -109,7 +109,7 @@ pipeline {
                                         git commit -m "Updated docker-compose with build number ${env.BUILD_NUMBER}"
 
 
-                                       git push origin master
+                                       git push -f origin master
 
                                     """
                                 }
