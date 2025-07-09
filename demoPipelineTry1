@@ -102,13 +102,15 @@ pipeline {
                                         git config user.email "Nikhil.mlk19861986@gmail.com"
                                         git config user.name "nikhil-mlk"
 
-                                        git rm -r --cached .terraform
+
 
                                         git status
 
                                         git pull origin master
+                                        git rm -r --cached .terraform
                                         git add docker-compose.yml
                                         git commit -m "Updated docker-compose with build number ${env.BUILD_NUMBER}"
+
 
 
                                        git push -f origin master
