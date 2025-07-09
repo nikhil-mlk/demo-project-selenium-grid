@@ -104,14 +104,13 @@ pipeline {
 
 
 
-
+                                        git pull origin master
                                         git add docker-compose.yml
                                         git commit -m "Updated docker-compose with build number ${env.BUILD_NUMBER}"
 
-                                        git pull https://github.com/nikhil-mlk/demo-project-selenium-grid.git master
 
+                                       git push origin master
 
-                                        git push -u origin master
                                     """
                                 }
                             }
