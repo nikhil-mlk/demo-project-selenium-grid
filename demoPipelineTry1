@@ -102,13 +102,13 @@ pipeline {
                                         git config user.email "Nikhil.mlk19861986@gmail.com"
                                         git config user.name "nikhil-mlk"
 
-                                        
-                                        git pull https://github.com/nikhil-mlk/demo-project-selenium-grid.git master
+
+
 
                                         git add docker-compose.yml
                                         git commit -m "Updated docker-compose with build number ${env.BUILD_NUMBER}"
 
-
+                                        git pull https://github.com/nikhil-mlk/demo-project-selenium-grid.git master
 
 
                                         git push -u origin master
