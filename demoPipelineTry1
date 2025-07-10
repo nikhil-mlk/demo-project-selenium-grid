@@ -107,15 +107,15 @@ pipeline {
                                         git status
 
                                         git pull origin master
-
+                                        git rm -r --cached .terraform
                                         git add docker-compose.yml
 
-                                        git rm -r --cached .terraform
+
                                         git commit -m "Updated docker-compose with build number ${env.BUILD_NUMBER}"
 
 
 
-                                       git push -f origin master
+                                       git push origin master
 
                                     """
                                 }
