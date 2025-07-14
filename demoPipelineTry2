@@ -46,6 +46,113 @@ pipeline {
                             }
 
 
+
+
+
+
+    stage('Set AWS Access and Secret Key')
+                    {
+                        steps{
+                            script{
+                                withCredentials([usernamePassword(credentialsId: 'AWS-Access-Secret-Key', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                                    bat """
+                                        aws configure set aws_access_key_id %AWS_ACCESS_KEY_ID%
+                                        aws configure set aws_secret_access_key %AWS_SECRET_ACCESS_KEY%
+                                        """
+                                   }
+                            }
+                        }
+                    }
+        stage('Set AWS Public Key and Create EC2 Instance') {
+                                steps{
+                                    script{
+                                        withCredentials([string(credentialsId: 'aws-public-key', variable: 'PUB_KEY')]) {
+                                            bat """
+                                                echo public_key = "%PUB_KEY%" > terraform.tfvars
+                                                terraform init -upgrade
+                                                terraform apply -auto-approve -var-file=terraform.tfvars
+                                            """
+                                        }
+                                    }
+                                    }
+                                }
+        stage('Fetch EC2 IP') {
+                            steps {
+                                script {
+                                    def ec2IpFull = bat(script: 'terraform output -raw ec2_public_ip', returnStdout: true).trim()
+                                    def ec2Ip = ec2IpFull.readLines()[-1].trim()
+                                    env.EC2_PUBLIC_IP = ec2Ip
+                                    echo "EC2 IP is: ${env.EC2_PUBLIC_IP}"
+                                }
+                            }
+                        }
+        stage('Replace IP in properties file') {
+            steps {
+                dir('C:/jenkins-runTests/workspace/terraform-file-execute') {
+                    script {
+                        def propsFile = readFile('demo.properties')
+                        propsFile = propsFile.replaceAll(/10\.10\.10\.215/, env.EC2_PUBLIC_IP)
+                        writeFile(file: 'demo.properties', text: propsFile)
+                        echo "Updated demo.properties with EC2 IP: ${env.EC2_PUBLIC_IP}"
+                    }
+                }
+            }
+        }
+
+
+
+
+        stage('Build Jar and build docker image') {
+                steps {
+                  dir('C:/jenkins-runTests/workspace/terraform-file-execute') {
+                      script {
+                          bat "mvn clean package -DskipTests"
+                          dockerImage=docker.build("${env.registry}:${env.BUILD_NUMBER}")
+                      }
+                  }
+
+                }
+            }
+
+        stage('Push Image to Docker Hub') {
+                steps {
+                    script {
+                        withCredentials([usernamePassword(credentialsId: env.registryCredential, passwordVariable: 'pass', usernameVariable: 'user')]) {
+                            bat "docker login --username=${user} --password=${pass}"
+                            bat "docker push ${env.registry}:${env.BUILD_NUMBER}"
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+        stage('Run docker-compose on EC2') {
+                steps {
+                    withCredentials([file(credentialsId: 'aws-private-key-file', variable: 'PRIVATE_KEY_PATH')]) {
+                        dir('C:/jenkins-runTests/workspace/terraform-file-execute') {
+
+                            bat """
+                                REM Fix permissions for SSH to accept the private key
+                                powershell -Command "icacls %PRIVATE_KEY_PATH% /inheritance:r; icacls %PRIVATE_KEY_PATH% /grant:r %USERNAME%:R"
+
+                                REM SSH into EC2 and run commands
+                                ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY_PATH% ubuntu@${env.EC2_PUBLIC_IP} ^
+                                "sudo usermod -aG docker ubuntu && git clone https://github.com/nikhil-mlk/demo-project-selenium-grid-docker-compose-file.git app && cd app && sudo docker-compose up -d"
+
+                                REM Optionally bring down after test execution if needed
+                                REM ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY_PATH% ubuntu@${env.EC2_PUBLIC_IP} "cd app && sudo docker-compose down"
+                            """
+                        }
+                    }
+                }
+            }
+
+
+
+
        }
 }
 
