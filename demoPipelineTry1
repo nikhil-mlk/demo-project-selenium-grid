@@ -17,6 +17,13 @@ pipeline {
             }
         }
     }
+    stage('Copy docker-compose.yml') {
+        steps {
+            script {
+                bat "copy C:\\jenkins-runTests\\workspace\\terraform-file-execute\\docker-compose.yml C:\\jenkins-runTests-docker-compose\\"
+            }
+        }
+    }
 
     stage('Set AWS Access and Secret Key')
                 {

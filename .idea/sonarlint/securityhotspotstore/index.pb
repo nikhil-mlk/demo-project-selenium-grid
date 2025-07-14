@@ -32,8 +32,6 @@ B
 runner/Jenkinsfile,6\5\650688c2727ff9c4559d7ed0c74609e235a9a628
 >
 healthcheck.sh,6\7\67e4a3427e5ee2403c63edd4577c3a3887275976
-Q
-!jenkins-ci-cd/docker-compose.yaml,6\f\6fa5f7114072eae488088812fd025032e731b741
 4
 .env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
 ?
