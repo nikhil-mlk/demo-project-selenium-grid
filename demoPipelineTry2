@@ -142,8 +142,7 @@ pipeline {
                                 ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY_PATH% ubuntu@${env.EC2_PUBLIC_IP} ^
                                 "sudo usermod -aG docker ubuntu && git clone https://github.com/nikhil-mlk/demo-project-selenium-grid-docker-compose-file.git app && cd app && sudo docker-compose up -d"
 
-                                REM Optionally bring down after test execution if needed
-                                REM ssh -o StrictHostKeyChecking=no -i %PRIVATE_KEY_PATH% ubuntu@${env.EC2_PUBLIC_IP} "cd app && sudo docker-compose down"
+
                             """
                         }
                     }

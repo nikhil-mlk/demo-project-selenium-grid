@@ -19,7 +19,7 @@ public class CustomerRegistration1 extends BaseClass {
         registrationPage.selectState();
         registrationPage.enterZip("v8v 1e2");
         registrationPage.clickRegisterButton();
-        Assert.assertEquals(4,6);
+
     }
     @Test(dependsOnMethods = {"customerRegistration"})
     public void clickFlightSearchButton()
