@@ -120,11 +120,7 @@ pipeline {
                 }
             }
 
-
-
-
-
-        stage('Run docker-compose on EC2') {
+            stage('Run docker-compose on EC2') {
                 steps {
                     withCredentials([file(credentialsId: 'aws-private-key-file', variable: 'PRIVATE_KEY_PATH')]) {
                         dir('C:/jenkins-runTests/workspace/terraform-file-execute') {
