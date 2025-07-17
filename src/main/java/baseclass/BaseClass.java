@@ -16,15 +16,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
-
-
-
 public class BaseClass {
-    //---private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     protected WebDriver driver;
     private Properties properties;
     public ChromeOptions options;
-
     @BeforeClass
     public void setupDriver() {
 
@@ -32,12 +27,10 @@ public class BaseClass {
             properties = new Properties();
             BufferedReader reader = new BufferedReader(new FileReader("./demo.properties"));
             properties.load(reader);
-
             String browserName = System.getProperty("browserName", properties.getProperty("browserName"));
             String runOnGrid = System.getProperty("runOnGrid", properties.getProperty("runOnGrid"));
             String hubURL = System.getProperty("hubURL", properties.getProperty("hubURL"));
             String appURL = System.getProperty("appUrl", properties.getProperty("appUrl"));
-
             if (browserName.equalsIgnoreCase("chrome") && runOnGrid.equalsIgnoreCase("yes")) {
                 MutableCapabilities dc = new ChromeOptions();
                 this.driver = new RemoteWebDriver(new URL(hubURL), dc);
