@@ -25,6 +25,8 @@ services:
      depends_on:
         - chrome
         - hub
+     volumes:
+       - /home/ubuntu/app/output:/demo-docker-project-directory/output
      networks:
        - demo-grid-net
 networks:
