@@ -96,7 +96,7 @@ data "aws_key_pair" "deployer" {
 # 6. EC2 Instance
 resource "aws_instance" "my_ec2" {
   ami                         = "ami-001dd4635f9fa96b0" # ✅ Ubuntu Image
-  instance_type               = "t2.micro"
+  instance_type               = "t2.medium"
   subnet_id                   = aws_subnet.my_subnet.id
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id]
   associate_public_ip_address = true
